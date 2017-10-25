@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="OFF">
+  <Properties>
+    <Property name="log-path">log/push</Property>
+    <Property name="log-project-name">app_push</Property>
+    <Property name="log-pattern">%L %M %m\n</Property>
+    <Property name="rollover-strategy-max">7</Property>
+  </Properties>
+  <appenders>
+    <RollingFile name="Data" fileName="${log-path}/${log-project-name}.log"
+      filePattern="${log-path}/${log-project-name}.log.%d{yyyy-MM-dd}">
+      <PatternLayout>
+        <pattern>${log-pattern}</pattern>
+      </PatternLayout>
+      <Policies>
+        <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+      </Policies>
+      <DefaultRolloverStrategy max="${rollover-strategy-max}"/>
+    </RollingFile>
+  </appenders>
+  <Loggers>
+    <AsyncLogger name="push-message" level="trace" additivity="false">
+      <AppenderRef ref="Data"/>
+    </AsyncLogger>
+  </Loggers>
+</configuration>
